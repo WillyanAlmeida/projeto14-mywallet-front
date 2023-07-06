@@ -1,12 +1,18 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
 import MyWalletLogo from "../components/MyWalletLogo"
+import axios from "axios";
+
+
 
 export default function SignInPage() {
 
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('')
   let [btstats, setBtstats] = useState(false)
+
+  const navigate = useNavigate()
 
   function login(e) {
 
