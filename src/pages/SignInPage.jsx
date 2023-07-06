@@ -3,23 +3,52 @@ import { Link } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
 
 export default function SignInPage() {
-  return (
-    <SingInContainer>
-      <form>
-        <MyWalletLogo />
-        <input placeholder="E-mail" type="email" />
-        <input placeholder="Senha" type="password" autocomplete="new-password" />
-        <button>Entrar</button>
-      </form>
 
-      <Link to={`/cadastro`}>
-        Primeira vez? Cadastre-se!
-      </Link>
-    </SingInContainer>
-  )
-}
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('')
+  let [btstats, setBtstats] = useState(false)
 
-const SingInContainer = styled.section`
+  function login(e) {
+
+    e.preventDefault();
+    setBtstats(true);
+    console.log(email)
+    console.log(password)
+    const cadastro = axios.post("http://localhost:5000/sign-in", {
+      email,
+      password,
+    })
+    cadastro.then(() => {
+      navigate("/home")
+      setBtstats(false)
+      console.log(cadastro)
+    })
+
+    cadastro.catch(erro => {
+      alert(erro);
+      setBtstats(false)
+      console.log(cadastro)
+    });
+  }
+
+
+    return (
+      <SingInContainer>
+        <form onSubmit={login}>
+          <MyWalletLogo />
+          <input disabled={btstats} placeholder="E-mail" type="email" required value={email} onChange={e => setEmail(e.target.value)} />
+          <input disabled={btstats} placeholder="Senha" type="password" required value={password} onChange={e => setPassword(e.target.value)} />
+          <button disabled={btstats} type="submit" >Entrar</button>
+        </form>
+
+        <Link to={`/cadastro`}>
+          Primeira vez? Cadastre-se!
+        </Link>
+      </SingInContainer>
+    )
+  }
+
+  const SingInContainer = styled.section`
   height: 100vh;
   display: flex;
   flex-direction: column;
