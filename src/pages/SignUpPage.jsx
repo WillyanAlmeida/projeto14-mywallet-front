@@ -47,11 +47,11 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form onSubmit={sendCadastro}>
         <MyWalletLogo />
-        <input disabled={btstats} placeholder="Nome" type="text" id="name" required value={name} onChange={e => setName(e.target.value)} />
-        <input disabled={btstats} id="email" required type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
-        <input disabled={btstats} placeholder="Senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        <input disabled={btstats} placeholder="Confirme a senha" type="password" value={passwordCheck} onChange={e => setPasswordCheck(e.target.value)} />
-        <button disabled={btstats} type="submit" >Cadastrar</button>
+        <input data-test="name" disabled={btstats} placeholder="Nome" type="text" id="name" required value={name} onChange={e => setName(e.target.value)} />
+        <input data-test="email" disabled={btstats} id="email" required type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <input data-test="password" disabled={btstats} placeholder="Senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input data-test="conf-password" disabled={btstats} placeholder="Confirme a senha" type="password" value={passwordCheck} onChange={e => setPasswordCheck(e.target.value)} />
+        <button data-test="sign-up-submit" disabled={btstats} type="submit" >Cadastrar</button>
       </form>
 
       <Link to={'/'} >
