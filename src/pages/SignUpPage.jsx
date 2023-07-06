@@ -4,6 +4,7 @@ import MyWalletLogo from "../components/MyWalletLogo"
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
+
 export default function SignUpPage() {
 
   let [email, setEmail] = useState('');
@@ -23,7 +24,7 @@ export default function SignUpPage() {
       console.log(name)
       console.log(email)
       console.log(password)
-      const cadastro = axios.post("http://localhost:5000/sign-up", {
+      const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/sign-up`, {
         email,
         name,
         password,

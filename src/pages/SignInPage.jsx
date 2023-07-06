@@ -6,6 +6,7 @@ import axios from "axios";
 
 
 
+
 export default function SignInPage() {
 
   let [email, setEmail] = useState('');
@@ -20,7 +21,8 @@ export default function SignInPage() {
     setBtstats(true);
     console.log(email)
     console.log(password)
-    const cadastro = axios.post("http://localhost:5000/sign-in", {
+    console.log(import.meta.env.VITE_API_URL)
+    const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/sign-in`, {
       email,
       password,
     })
