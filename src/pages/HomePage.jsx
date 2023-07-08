@@ -18,10 +18,11 @@ export default function HomePage() {
   //         });
   // }, []);
 
-  function newtransactionrout() {
+  function newtransactionrout(x) {
     
-    navigate(`/nova-transacao/${transaction}`)
-    console.log(transaction)
+    setTransaction(x)
+    navigate(`/nova-transacao/${x}`)
+    console.log(x)
   }
 
  
@@ -60,14 +61,14 @@ export default function HomePage() {
       </TransactionsContainer>
 
       <ButtonsContainer>
-        <button data-test="new-income" onClick={() => { setTransaction("entrada"), newtransactionrout() }}>
+        <button data-test="new-income" onClick={() => { setTransaction("entrada"), newtransactionrout("entrada") }}>
          
             <AiOutlinePlusCircle />
             <p>Nova <br /> entrada</p>
          
         </button>
 
-        <button data-test="new-expense" onClick={() => { setTransaction("saída"), newtransactionrout() }}>          
+        <button data-test="new-expense" onClick={() => { setTransaction("saída"), newtransactionrout("saída") }}>          
           
             <AiOutlineMinusCircle />
             <p>Nova <br />saída</p>
