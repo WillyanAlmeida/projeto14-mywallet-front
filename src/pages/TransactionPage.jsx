@@ -3,6 +3,7 @@ import { UserContext } from "../Context";
 import { useState, useEffect, useContext } from "react";
 import CurrencyInput from "react-currency-input-field"
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function TransactionsPage() {
   let [value, setValue] = useState('');
