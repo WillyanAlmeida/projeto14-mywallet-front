@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import MyWalletLogo from "../components/MyWalletLogo"
 import axios from "axios";
+import { UserContext } from "../Context";
 
 
 
@@ -12,6 +13,7 @@ export default function SignInPage() {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('')
   let [btstats, setBtstats] = useState(false)
+  const {setUser} = useContext(UserContext);
 
   const navigate = useNavigate()
 
@@ -19,17 +21,17 @@ export default function SignInPage() {
 
     e.preventDefault();
     setBtstats(true);
-    console.log(email)
-    console.log(password)
-    console.log(import.meta.env.VITE_API_URL)
+
     const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/sign-in`, {
       email,
       password,
     })
-    cadastro.then(() => {
-      navigate("/home")
+    cadastro.then((x) => {
+      
+      setUser(x.data.user)
       setBtstats(false)
-      console.log(cadastro)
+      navigate("/home")
+     
     })
 
     cadastro.catch(erro => {

@@ -1,12 +1,36 @@
 import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
+import { UserContext } from "../Context";
+import { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
 
 export default function HomePage() {
+
+  const { user, setUser, transaction, setTransaction } = useContext(UserContext);
+
+  const navigate = useNavigate()
+  //   useEffect(() => {
+  //     const requisicao = axios.get(`${import.meta.env.VITE_API_URL}/home`);
+
+  //     requisicao.then(resposta => {
+  //         setMovies(resposta.data);
+  //         });
+  // }, []);
+
+  function entrada() {
+    setTransaction("entrada")
+  }
+
+  function saida() {
+    setTransaction("saída")
+  }
+
+
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
+        <h1>Olá, {user?.name}</h1>
         <BiExit />
       </Header>
 
@@ -37,14 +61,24 @@ export default function HomePage() {
 
 
       <ButtonsContainer>
-        <button>
-          <AiOutlinePlusCircle />
-          <p>Nova <br /> entrada</p>
+
+        <button onClick={() => { setTransaction("entrada") }}>
+          <Link to={`/nova-transacao/${transaction}`}>
+            <AiOutlinePlusCircle />
+            <p>Nova <br /> entrada</p>
+          </Link>
         </button>
-        <button>
-          <AiOutlineMinusCircle />
-          <p>Nova <br />saída</p>
+
+
+        <button onClick={() => { setTransaction("saída") }}>
+          
+          <Link to={`/nova-transacao/${transaction}`}>
+            <AiOutlineMinusCircle />
+            <p>Nova <br />saída</p>
+          </Link>
+          
         </button>
+
       </ButtonsContainer>
 
     </HomeContainer>

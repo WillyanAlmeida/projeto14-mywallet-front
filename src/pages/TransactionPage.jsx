@@ -1,13 +1,44 @@
 import styled from "styled-components"
+import { UserContext } from "../Context";
+import { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function TransactionsPage() {
+  let [value, setValue] = useState('');
+  let [description, setDescription] = useState('')
+  const { user, setUser, transaction, setTransaction } = useContext(UserContext);
+
+function newTransaction(e){
+  e.preventDefault();
+  setBtstats(true);
+  const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/nova-transacao/${transaction}`, {
+    value,
+    description,
+    id: user._id
+  })
+  cadastro.then((x) => {
+    
+   
+    setBtstats(false)
+    navigate("/home")
+   
+  })
+
+  cadastro.catch(erro => {
+    alert(erro);
+    setBtstats(false)
+    console.log(cadastro)
+  });
+
+}
+
   return (
     <TransactionsContainer>
-      <h1>Nova TRANSAÇÃO</h1>
-      <form>
-        <input placeholder="Valor" type="text"/>
-        <input placeholder="Descrição" type="text" />
-        <button>Salvar TRANSAÇÃO</button>
+      <h1>Nova {transaction}</h1>
+      <form onSubmit={newTransaction} >
+        <input placeholder="Valor" type="text" required decimalsLimit={2} decimalSeparator="." groupSeparator="," prefix="R$" allowNegativeValue={false} onChange={e => setValue(e.target.value)}/>
+        <input placeholder="Descrição" type="text" required onChange={e => setDescription(e.target.value)}/>
+        <button type="submit">Salvar {transaction}</button>
       </form>
     </TransactionsContainer>
   )
