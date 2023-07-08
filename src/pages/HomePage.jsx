@@ -59,26 +59,20 @@ export default function HomePage() {
         </article>
       </TransactionsContainer>
 
-
       <ButtonsContainer>
-
-        <button onClick={() => { setTransaction("entrada") }}>
+        <button data-test="new-income" onClick={() => { setTransaction("entrada") }}>
           <Link to={`/nova-transacao/${transaction}`}>
             <AiOutlinePlusCircle />
             <p>Nova <br /> entrada</p>
           </Link>
         </button>
 
-
-        <button onClick={() => { setTransaction("saída") }}>
-          
+        <button data-test="new-expense" onClick={() => { setTransaction("saída") }}>          
           <Link to={`/nova-transacao/${transaction}`}>
             <AiOutlineMinusCircle />
             <p>Nova <br />saída</p>
-          </Link>
-          
+          </Link>          
         </button>
-
       </ButtonsContainer>
 
     </HomeContainer>

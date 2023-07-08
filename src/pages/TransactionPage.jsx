@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function TransactionsPage() {
   let [value, setValue] = useState('');
   let [description, setDescription] = useState('')
+  let [btstats, setBtstats] = useState(false)
   const { user, setUser, transaction, setTransaction } = useContext(UserContext);
 
 function newTransaction(e){
@@ -36,9 +37,9 @@ function newTransaction(e){
     <TransactionsContainer>
       <h1>Nova {transaction}</h1>
       <form onSubmit={newTransaction} >
-        <input placeholder="Valor" type="text" required decimalsLimit={2} decimalSeparator="." groupSeparator="," prefix="R$" allowNegativeValue={false} onChange={e => setValue(e.target.value)}/>
-        <input placeholder="Descrição" type="text" required onChange={e => setDescription(e.target.value)}/>
-        <button type="submit">Salvar {transaction}</button>
+        <input disabled={btstats} data-test="registry-amount-input" placeholder="Valor" type="text" required decimalsLimit={2} decimalSeparator="." groupSeparator="," prefix="R$" allowNegativeValue={false} onChange={e => setValue(e.target.value)}/>
+        <input disabled={btstats} data-test="registry-name-input" placeholder="Descrição" type="text" required onChange={e => setDescription(e.target.value)}/>
+        <button data-test="registry-save" type="submit">Salvar {transaction}</button>
       </form>
     </TransactionsContainer>
   )
