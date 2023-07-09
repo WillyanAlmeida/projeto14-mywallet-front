@@ -10,12 +10,17 @@ export default function TransactionsPage() {
   let [description, setDescription] = useState('')
   let [btstats, setBtstats] = useState(false)
   const { user, setUser, transaction, setTransaction } = useContext(UserContext);
+
+
+  const navigate = useNavigate()
+
   
   const config = {
     headers: {
         "Authorization": `Bearer ${user.token}`
     }
 }
+console.log(config)
 
 function newTransaction(e){
   e.preventDefault();
