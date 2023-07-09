@@ -72,7 +72,7 @@ export default function HomePage() {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={etotal>0?"positivo":"negativo"}>{(etotal/100).toFixed(2).replace(".",",")}</Value>
+          <Value data-test="total-amount"  color={etotal>0?"positivo":"negativo"}>{(etotal/100).toFixed(2).replace(".",",")}</Value>
         </article>
       </TransactionsContainer>
 
