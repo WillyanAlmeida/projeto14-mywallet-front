@@ -11,6 +11,11 @@ export default function TransactionsPage() {
   let [btstats, setBtstats] = useState(false)
   const { user, setUser, transaction, setTransaction } = useContext(UserContext);
   
+  const config = {
+    headers: {
+        "Authorization": `Bearer ${user.token}`
+    }
+}
 
 function newTransaction(e){
   e.preventDefault();
@@ -23,7 +28,7 @@ function newTransaction(e){
      value: Number(value),
      description,
      id: user.id
-   })
+   }, config)
    cadastro.then((x) => {
     
    
