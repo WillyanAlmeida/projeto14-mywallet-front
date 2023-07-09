@@ -18,6 +18,7 @@ export default function App() {
 
   const [user, setUser] = useState()
   const [transaction, setTransaction] = useState()
+  const [alltransaction, setAlltransaction] = useState()
   if(user){
   axios.defaults.headers.common['Authorization'] = user?.token;
 }
@@ -25,7 +26,7 @@ export default function App() {
   return (
     <PagesContainer>
       <BrowserRouter>
-        <UserContext.Provider value={{ user, setUser, transaction, setTransaction }}>
+        <UserContext.Provider value={{ user, setUser, transaction, setTransaction, alltransaction, setAlltransaction }}>
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/cadastro" element={<SignUpPage />} />

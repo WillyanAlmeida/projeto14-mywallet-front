@@ -20,7 +20,7 @@ export default function TransactionsPage() {
         "Authorization": `Bearer ${user.token}`
     }
 }
-console.log(config)
+
 
 function newTransaction(e){
   e.preventDefault();
@@ -34,8 +34,7 @@ function newTransaction(e){
      description,
      id: user.id
    }, config)
-   cadastro.then((x) => {
-    
+   cadastro.then((x) => {  
    
      setBtstats(false)
      navigate("/home")
