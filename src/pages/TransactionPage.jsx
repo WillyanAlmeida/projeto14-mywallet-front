@@ -51,7 +51,7 @@ function newTransaction(e){
 
   return (
     <TransactionsContainer>
-      <h1>Nova {transaction}</h1>
+      <h1>Nova {transaction==="saida"?"saída":transaction}</h1>
       <form onSubmit={newTransaction} >
       <CurrencyInput disabled={btstats} data-test="registry-amount-input" placeholder="Valor" type="text" required decimalsLimit={2} decimalSeparator="." groupSeparator="," prefix="R$" allowNegativeValue={false} onChange={e => setValue(e.target.value)}/>
         <input disabled={btstats} data-test="registry-name-input" placeholder="Descrição" type="text" required onChange={e => setDescription(e.target.value)}/>

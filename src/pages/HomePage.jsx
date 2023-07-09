@@ -38,7 +38,7 @@ export default function HomePage() {
       if (e.type === "entrada") {
         total =total + e.value
       }
-      if (e.type === "saída") {
+      if (e.type === "saida") {
         total =total - e.value
       }
     })
@@ -64,7 +64,7 @@ export default function HomePage() {
                 <span>{transaction.date}</span>
                 <strong data-test="registry-name" >{transaction.description}</strong>
               </div>
-              <Value data-test="registry-amount" color={transaction.type === "entrada" ? "positivo" : "negativo"} >{(transaction.value / 100).toFixed(2)}</Value>
+              <Value data-test="registry-amount" color={transaction.type === "entrada" ? "positivo" : "negativo"} >{(transaction.value / 100).toFixed(2).replace(".",",")}</Value>
             </ListItemContainer>
           )}
 
@@ -72,7 +72,7 @@ export default function HomePage() {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={etotal>0?"positivo":"negativo"}>{(etotal/100).toFixed(2)}</Value>
+          <Value color={etotal>0?"positivo":"negativo"}>{(etotal/100).toFixed(2).replace(".",",")}</Value>
         </article>
       </TransactionsContainer>
 
@@ -84,7 +84,7 @@ export default function HomePage() {
 
         </button>
 
-        <button data-test="new-expense" onClick={() => { setTransaction("saída"), newtransactionrout("saída") }}>
+        <button data-test="new-expense" onClick={() => { setTransaction("saida"), newtransactionrout("saida") }}>
 
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
