@@ -10,29 +10,33 @@ export default function TransactionsPage() {
   let [description, setDescription] = useState('')
   let [btstats, setBtstats] = useState(false)
   const { user, setUser, transaction, setTransaction } = useContext(UserContext);
-  console.log(user.id)
+  
 
 function newTransaction(e){
   e.preventDefault();
   setBtstats(true);
-  const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/nova-transacao/${transaction}`, {
-    value: Number(value),
-    description,
-    id: user.id
-  })
-  cadastro.then((x) => {
+  value = value?.replace("R$", "")
+  value = value?.replace(",", "")
+  value = value?.replace(".", "") 
+  
+   const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/nova-transacao/${transaction}`, {
+     value: Number(value),
+     description,
+     id: user.id
+   })
+   cadastro.then((x) => {
     
    
-    setBtstats(false)
-    navigate("/home")
+     setBtstats(false)
+     navigate("/home")
    
-  })
+   })
 
-  cadastro.catch(erro => {
-    alert(erro);
-    setBtstats(false)
-    console.log(cadastro)
-  });
+   cadastro.catch(erro => {
+     alert(erro);
+     setBtstats(false)
+     console.log(cadastro)
+   });
 
 }
 
