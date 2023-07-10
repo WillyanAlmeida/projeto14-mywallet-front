@@ -8,7 +8,7 @@ import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
 
 export default function HomePage() {
   let total = 0
-  let [etotal, setEtotal]= useState(total)
+  let [etotal, setEtotal] = useState(total)
   const { user, setUser, transaction, setTransaction, alltransaction, setAlltransaction } = useContext(UserContext);
   const config = {
     headers: {
@@ -21,9 +21,9 @@ export default function HomePage() {
     const requisicao = axios.get(`${import.meta.env.VITE_API_URL}/home`, config);
 
     requisicao.then(resposta => {
-      setAlltransaction(resposta.data)
+      setAlltransaction((resposta.data))
       total = 0
-      somartotal(resposta.data)
+      somartotal(resposta.data.reverse())
       console.log((resposta.data))
     });
   }, []);
@@ -36,10 +36,10 @@ export default function HomePage() {
   function somartotal(transaction) {
     transaction.forEach((e) => {
       if (e.type === "entrada") {
-        total =total + e.value
+        total = total + e.value
       }
       if (e.type === "saida") {
-        total =total - e.value
+        total = total - e.value
       }
     })
     setEtotal(total)
@@ -53,18 +53,20 @@ export default function HomePage() {
     <HomeContainer>
       <Header>
         <h1 data-test="user-name">Olá, {user?.name}</h1>
-        <BiExit />
+        <Link data-test="logout" to={"/"}>
+          <BiExit />
+        </Link>
       </Header>
 
       <TransactionsContainer>
         <ul>
-          {alltransaction?.map((transaction) =>
+          {alltransaction.reverse()?.map((transaction) =>
             <ListItemContainer key={transaction._id} >
               <div>
                 <span>{transaction.date}</span>
                 <strong data-test="registry-name" >{transaction.description}</strong>
               </div>
-              <Value data-test="registry-amount" color={transaction.type === "entrada" ? "positivo" : "negativo"} >{(transaction.value / 100).toFixed(2).replace(".",",")}</Value>
+              <Value data-test="registry-amount" color={transaction.type === "entrada" ? "positivo" : "negativo"} >{(transaction.value / 100).toFixed(2).replace(".", ",")}</Value>
             </ListItemContainer>
           )}
 
@@ -72,7 +74,7 @@ export default function HomePage() {
 
         <article>
           <strong>Saldo</strong>
-          <Value data-test="total-amount"  color={etotal>0?"positivo":"negativo"}>{(etotal/100).toFixed(2).replace(".",",")}</Value>
+          <Value data-test="total-amount" color={etotal > 0 ? "positivo" : "negativo"}>{(etotal / 100).toFixed(2).replace(".", ",")}</Value>
         </article>
       </TransactionsContainer>
 
