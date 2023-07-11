@@ -71,7 +71,7 @@ export default function HomePage() {
 
       <TransactionsContainer>
         <ul>
-          {alltransaction?.map((transaction) =>
+          {alltransaction.reverse()?.map((transaction) =>
             <ListItemContainer key={transaction._id} >
               <div>
                 <span>{transaction.date}</span>
