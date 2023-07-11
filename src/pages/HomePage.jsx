@@ -17,6 +17,7 @@ export default function HomePage() {
   }
 
   const navigate = useNavigate()
+  if(!user) navigate("/")
   useEffect(() => {
     const requisicao = axios.get(`${import.meta.env.VITE_API_URL}/home`, config);
 
