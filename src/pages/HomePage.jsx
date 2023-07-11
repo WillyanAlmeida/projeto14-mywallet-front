@@ -11,14 +11,17 @@ export default function HomePage() {
   let [etotal, setEtotal] = useState(total)
   const { user, setUser, transaction, setTransaction, alltransaction, setAlltransaction } = useContext(UserContext);
   const navigate = useNavigate()
-  if(!user) navigate("/")
-  const config = {
-    headers: {
-      "Authorization": `Bearer ${user?.token}`
-    }
-  }
-
+  
  
+
+
+
+     const config = {
+      headers: {
+        "Authorization": `Bearer ${user?.token}`
+      }
+    }
+
   useEffect(() => {
     const requisicao = axios.get(`${import.meta.env.VITE_API_URL}/home`, config);
 
@@ -27,14 +30,18 @@ export default function HomePage() {
       total = 0
       somartotal(resposta.data.reverse())
       console.log((resposta.data))
-    });
+    })
+    requisicao.catch(erro => {
+      navigate("/")
+    })
+    
+    ;
   }, []);
 
   function newtransactionrout(x) {
     setTransaction(x)
     navigate(`/nova-transacao/${x}`)
-    console.log(x)
-  }
+      }
   function somartotal(transaction) {
     transaction.forEach((e) => {
       if (e.type === "entrada") {
@@ -45,12 +52,14 @@ export default function HomePage() {
       }
     })
     setEtotal(total)
-    console.log(total)
+    
   }
 
   if (alltransaction === undefined) {
     return <div>Carregando.....</div>
   }
+ 
+  
   return (
     <HomeContainer>
       <Header>
