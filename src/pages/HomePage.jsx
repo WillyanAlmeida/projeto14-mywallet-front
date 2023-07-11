@@ -10,14 +10,15 @@ export default function HomePage() {
   let total = 0
   let [etotal, setEtotal] = useState(total)
   const { user, setUser, transaction, setTransaction, alltransaction, setAlltransaction } = useContext(UserContext);
+  const navigate = useNavigate()
+  if(!user) navigate("/")
   const config = {
     headers: {
-      "Authorization": `Bearer ${user.token}`
+      "Authorization": `Bearer ${user?.token}`
     }
   }
 
-  const navigate = useNavigate()
-  if(!user) navigate("/")
+ 
   useEffect(() => {
     const requisicao = axios.get(`${import.meta.env.VITE_API_URL}/home`, config);
 
