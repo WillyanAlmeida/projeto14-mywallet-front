@@ -8,20 +8,15 @@ import { UserContext } from "./Context"
 import React, { useState } from "react";
 import axios from "axios"
 
-const usePathname = () => {
-  const location = useLocation();
-  return location.pathname;
-}
-
 
 export default function App() {
 
   const [user, setUser] = useState()
   const [transaction, setTransaction] = useState()
   const [alltransaction, setAlltransaction] = useState()
-  if(user){
-  axios.defaults.headers.common['Authorization'] = user?.token;
-}
+  if (user) {
+    axios.defaults.headers.common['Authorization'] = user?.token;
+  }
 
   return (
     <PagesContainer>

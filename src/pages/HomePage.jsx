@@ -9,39 +9,33 @@ import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
 export default function HomePage() {
   let total = 0
   let [etotal, setEtotal] = useState(total)
-  const { user, setUser, transaction, setTransaction, alltransaction, setAlltransaction } = useContext(UserContext);
+  const { user, setTransaction, alltransaction, setAlltransaction } = useContext(UserContext);
   const navigate = useNavigate()
-  
- 
 
-
-
-     const config = {
-      headers: {
-        "Authorization": `Bearer ${user?.token}`
-      }
+  const config = {
+    headers: {
+      "Authorization": `Bearer ${user?.token}`
     }
+  }
 
   useEffect(() => {
-    const requisicao = axios.get(`${import.meta.env.VITE_API_URL}/home`, config);
+    const requisition = axios.get(`${import.meta.env.VITE_API_URL}/home`, config);
 
-    requisicao.then(resposta => {
+    requisition.then(resposta => {
       setAlltransaction((resposta.data))
       total = 0
       somartotal(resposta.data.reverse())
-      console.log((resposta.data))
     })
-    requisicao.catch(erro => {
+    requisition.catch(erro => {
       navigate("/")
     })
-    
-    ;
+      ;
   }, []);
 
   function newtransactionrout(x) {
     setTransaction(x)
     navigate(`/nova-transacao/${x}`)
-      }
+  }
   function somartotal(transaction) {
     transaction.forEach((e) => {
       if (e.type === "entrada") {
@@ -52,14 +46,12 @@ export default function HomePage() {
       }
     })
     setEtotal(total)
-    
   }
 
   if (alltransaction === undefined) {
     return <div>Carregando.....</div>
   }
- 
-  
+
   return (
     <HomeContainer>
       <Header>

@@ -1,12 +1,11 @@
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from 'axios';
 
 
 export default function SignUpPage() {
-
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('')
   let [passwordCheck, setPasswordCheck] = useState('')
@@ -16,30 +15,23 @@ export default function SignUpPage() {
   const navigate = useNavigate()
 
   function sendCadastro(e) {
-
     e.preventDefault();
     setBtstats(true);
 
     if (password === passwordCheck) {
-      console.log(name)
-      console.log(email)
-      console.log(password)
       const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/sign-up`, {
         email,
         name,
         password,
       })
-      console.log(cadastro)
       cadastro.then(() => {
         navigate("/")
         setBtstats(false)
-        console.log(cadastro)
       })
 
       cadastro.catch(erro => {
         alert(erro);
         setBtstats(false)
-        console.log(cadastro)
       });
     }
   }
