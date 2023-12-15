@@ -33,7 +33,6 @@ export default function TransactionsPage() {
       id: user.id
     }, config)
     cadastro.then((x) => {
-
       setBtstats(false)
       navigate("/home")
     })

@@ -26,7 +26,8 @@ export default function HomePage() {
       total = 0
       somartotal(resposta.data.reverse())
     })
-    requisition.catch(erro => {
+    requisition.catch(error => {
+      console.log(error)
       navigate("/")
     })
       ;

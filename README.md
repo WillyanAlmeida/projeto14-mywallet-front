@@ -44,3 +44,15 @@ This is an open-source project! Feel free to contribute by reporting issues and 
 - JavaScript
 - Styled-Component
 
+# Who run with docker
+
+- build image docker:
+
+```
+$ docker build -t nameimage
+```
+- run docker image:
+
+```
+$ docker run -d --name front-end -p 8080:80 nameimage
+```
