@@ -31,7 +31,7 @@ $ npm i
 $ npm start
 ```
 
-4. Finally access http://localhost:3000 on a browser of your choice (if it doesn't automatically)
+4. Finally access http://localhost:5000 on a browser of your choice (if it doesn't automatically)
 
 ## Contributing
 
